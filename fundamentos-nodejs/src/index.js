@@ -27,6 +27,18 @@ app.post('/account', (request, response) => {
 	return response.status(201).send('Salvo com sucesso')
 });
 
+app.get('/statement/:cpf', (request, response) => {
+	const { cpf } = request.params;
+
+	const custumer = custumers.find(custumerFund => custumerFund.cpf === cpf);
+
+	if(!custumer) {
+		return response.status(400).json({ error: "Custumer not fund" })
+	}
+
+	return response.status(200).json(custumer.statement);
+})
+
 app.listen('3333', () => {
 	console.log('Server starter')
 });
