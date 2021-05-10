@@ -47,6 +47,8 @@ app.get('/statement', verifyOfExistesAccountCPF, (request, response) => {
 	return response.status(200).json(custumer.statement);
 })
 
+app.post('/deposit',(request, reponse) => {});
+
 app.listen('3333', () => {
 	console.log('Server starter')
 });
