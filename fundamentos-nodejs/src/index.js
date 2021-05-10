@@ -2,9 +2,23 @@ const express = require('express');
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
 
 const custumers = [];
+
+function verifyOfExistesAccountCPF(request, response, next) {
+	const { cpf } = request.headers;
+
+	const custumer = custumers.find(custumerFund => custumerFund.cpf === cpf);
+	
+	if(!custumer) {
+		return response.status(400).json({ error: "Custumer not fund" })
+	}
+
+	request.custumer = custumer;
+
+	return next();
+};
 
 app.post('/account', (request, response) => {
 	const { cpf, name } = request.body;
@@ -27,14 +41,8 @@ app.post('/account', (request, response) => {
 	return response.status(201).send('Salvo com sucesso')
 });
 
-app.get('/statement', (request, response) => {
-	const { cpf } = request.headers;
-
-	const custumer = custumers.find(custumerFund => custumerFund.cpf === cpf);
-
-	if(!custumer) {
-		return response.status(400).json({ error: "Custumer not fund" })
-	}
+app.get('/statement', verifyOfExistesAccountCPF, (request, response) => {
+	const { custumer } = request;	
 
 	return response.status(200).json(custumer.statement);
 })
