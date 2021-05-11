@@ -115,6 +115,15 @@ app.get('/statement/date', verifyOfExistesAccountCPF, (request, response) => {
 	return response.status(200).json(statement);
 })
 
+app.put("/account", verifyOfExistesAccountCPF, (request, response) => {
+	const { name } = request.body;
+	const { custumer } = request;
+
+	custumer.name = name;
+
+	return response.status(200).send();
+});
+
 app.listen('3333', () => {
 	console.log('Server starter')
 });
