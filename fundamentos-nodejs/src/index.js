@@ -130,6 +130,16 @@ app.get('/account', verifyOfExistesAccountCPF, (request, response) => {
 	return response.json(custumer);
 });
 
+app.delete('/account', verifyOfExistesAccountCPF, (request, response) => {
+	const { custumer } = request;
+
+	custumers.splice(custumer, 1);
+
+	// Retornando o 200 para ver o retorno sem a conta deletada, o retorno deveria
+	// ser 204
+	return response.status(200).json(custumers);
+})
+
 app.listen('3333', () => {
 	console.log('Server starter')
 });
