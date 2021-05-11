@@ -100,6 +100,21 @@ app.post('/withdraw', verifyOfExistesAccountCPF, (request, response) => {
 	return response.status(200).send();
 });
 
+app.get('/statement/date', verifyOfExistesAccountCPF, (request, response) => {
+	const { custumer } = request;
+	const { date } = request.query;
+
+	const dateFormate = new Date(date + " 00:00");
+
+	const statement = custumer.statement.filter(
+		(statement) => statement
+			.create_at
+			.toDateString() === new Date(dateFormate).toDateString()
+	);
+
+	return response.status(200).json(statement);
+})
+
 app.listen('3333', () => {
 	console.log('Server starter')
 });
