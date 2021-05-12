@@ -1,5 +1,11 @@
+interface CourseTypes {
+	name: string;
+	duration: number;
+	educator: string;
+}
+
 class CreateCourseService {
-	execulte(name: string, duration: number, educator: string) {
+	execulte({ name, duration, educator }: CourseTypes) {
 		console.log(name, duration, educator);
 	}
 }
