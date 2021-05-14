@@ -21,8 +21,9 @@
         "prettier"
     ],
     "rules": {
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
         "@typescript-eslint/no-unused-vars": [
-            "error",
+            "warn",
             {
               "argsIgnorePattern": "_"
             }
@@ -38,7 +39,7 @@
             "custom": {
                 "regex": "^I[A-Z]",
                 "match": true
-            }
+                }
             }
         ],
         "class-methods-use-this": "off",
@@ -52,15 +53,15 @@
             "error",
             "ignorePackages",
             {
-            "ts": "never"
+                "ts": "never"
             }
         ],
         "import-helpers/order-imports": [
             "warn",
             {
-            "newlinesBetween": "always",
-            "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
-            "alphabetize": { "order": "asc", "ignoreCase": true }
+                "newlinesBetween": "always",
+                "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+                "alphabetize": { "order": "asc", "ignoreCase": true }
             }
         ],
         "import/no-extraneous-dependencies": [
