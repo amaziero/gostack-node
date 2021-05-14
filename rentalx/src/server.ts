@@ -1,10 +1,10 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import { categoriesRoutes } from './routes/categories.routes';
 
 const app = express();
+app.use(express.json());
 
-app.listen('/', (request, response) => {
-	return response.json({ message: 'Hello word' });
-})
+app.use('/categories', categoriesRoutes);
 
 app.listen(3333, () => {
 	console.log('Server starter!');
