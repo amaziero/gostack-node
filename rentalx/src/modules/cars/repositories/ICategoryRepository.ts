@@ -1,5 +1,9 @@
-import { ICreateCategoryDTO } from "../../../dtos/ICategoriesDTO";
 import { Category } from "../model/Category";
+
+interface ICreateCategoryDTO {
+  name: string;
+  description: string;
+}
 
 interface ICategoriesRepository {
   findByName(name: string): Category | undefined;
@@ -7,4 +11,4 @@ interface ICategoriesRepository {
   create({ name, description }: ICreateCategoryDTO): void;
 }
 
-export { ICategoriesRepository };
+export { ICategoriesRepository, ICreateCategoryDTO };
