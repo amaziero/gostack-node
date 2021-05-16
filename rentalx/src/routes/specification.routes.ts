@@ -1,4 +1,4 @@
-import { response, Router } from "express";
+import { Router } from "express";
 
 import { SpecificationsRepository } from "../modules/cars/repositories/SpecificationsRepository";
 import { CreateSpecificationService } from "../modules/cars/services/CreateSpecificationService";
@@ -6,7 +6,7 @@ import { CreateSpecificationService } from "../modules/cars/services/CreateSpeci
 const specificationRouter = Router();
 const specificationsRepository = new SpecificationsRepository();
 
-specificationRouter.post("/", (request, _response) => {
+specificationRouter.post("/", (request, response) => {
   const createSpecificationService = new CreateSpecificationService(
     specificationsRepository
   );
