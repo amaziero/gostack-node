@@ -1,0 +1,78 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "RentalX Documentation",
+		"Description": "This is an API Rent",
+		"version": "1.0.0",
+		"contact": {
+			"email": "alison_lens@hotmail.com",
+			"linkedin": "linkedin.com/in/alison-maziero"
+		}
+	},
+	"paths": {
+		"/categories": {
+			"post": {
+				"tags": ["Categoty"],
+				"summary": "Create a category",
+				"description": "Create a new category",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"propriedades": {
+									"name": {
+										"types": "string"
+									},
+									"description": {
+										"type": "string"
+									}
+								},
+								"example": {
+									"name": "categotyTest",
+									"description": "categoryDescription sample"
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Created"
+					},
+					"500": {
+						"error": "Category Created"
+					}
+				}
+			},
+			"get": {
+				"tag": ["Category"],
+				"summary": "List all categories",
+				"description": "List all categories",
+				"response": {
+					"200": {
+						"desciprition": "Sucess",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"name": {
+												"type": "string"
+											},
+											"description": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
