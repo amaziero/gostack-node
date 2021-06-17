@@ -14,13 +14,3 @@ container.registerSingleton<ISpecificationRepository>(
   "SpecificationsRepository",
   SpecificationsRepository
 );
-
-container.registerSingleton<ICategoriesRepository>(
-  "ImportCategory",
-  CategoriesRepository
-);
-
-container.registerSingleton<ICategoriesRepository>(
-  "ListCategories",
-  CategoriesRepository
-);

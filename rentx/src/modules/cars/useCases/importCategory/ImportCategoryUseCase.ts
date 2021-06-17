@@ -12,7 +12,7 @@ interface IImportCategory {
 @injectable()
 class ImportCategoryUseCase {
   constructor(
-    @inject("ImportCategory")
+    @inject("CategoriesRepository")
     private categoriesRepository: CategoriesRepository
   ) {}
 
