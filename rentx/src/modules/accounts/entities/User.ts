@@ -16,9 +16,6 @@ class User {
   name: string | undefined;
 
   @Column()
-  username: string | undefined;
-
-  @Column()
   password: string | undefined;
 
   @Column()
