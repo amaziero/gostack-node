@@ -10,7 +10,6 @@ class UserRepository implements IUsersRepository {
   constructor() {
     this.repository = getRepository(User);
   }
-
   async create({
     name,
     email,
@@ -25,6 +24,14 @@ class UserRepository implements IUsersRepository {
     });
 
     await this.repository.save(user);
+  }
+
+  async findByEmail(email: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({
+      email,
+    });
+
+    return user;
   }
 }
 
