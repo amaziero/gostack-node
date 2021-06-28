@@ -1,5 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 
+import { AppError } from "../../../../Errors/AppError";
 import { Specification } from "../../entities/Specification";
 import {
   ICreateSpecificationDTO,
@@ -26,7 +27,7 @@ class SpecificationsRepository implements ISpecificationRepository {
     const specification = await this.repository.findOne({ name });
 
     if (!specification) {
-      throw new Error("Could not find this specification");
+      throw new AppError("Could not find this specification");
     }
 
     return specification;
