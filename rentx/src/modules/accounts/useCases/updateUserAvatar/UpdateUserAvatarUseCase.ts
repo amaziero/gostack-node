@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { deleteFile } from "../../../../utils/file";
 import { IUsersRepository } from "../../repositories/IUserRepositories";
 
 interface IRequest {
@@ -15,6 +16,10 @@ class UpdateUserAvatarUseCase {
   ) {}
   async execute({ avatar_file, user_id }: IRequest): Promise<void> {
     const user = await this.usersRepostory.findById(user_id);
+
+    if (user.avatar) {
+      await deleteFile(`./tmp/avatar/${user.avatar}`);
+    }
 
     user.avatar = avatar_file;
 
