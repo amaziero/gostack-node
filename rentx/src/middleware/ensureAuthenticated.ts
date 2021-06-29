@@ -34,6 +34,10 @@ export async function ensuereAuthenticate(
       throw new AppError("User not fund", 401);
     }
 
+    request.user = {
+      id: user.id,
+    };
+
     next();
   } catch (error) {
     throw new AppError("invalid token", 401);
