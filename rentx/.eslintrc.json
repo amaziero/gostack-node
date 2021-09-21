@@ -66,7 +66,7 @@
             }
         ],
         "import/no-extraneous-dependencies": [
-            "0",
+            0,
             { "devDependencies": ["**/*.spec.js"] }
         ]
     },

@@ -1,11 +1,10 @@
+import { AppError } from "@shared/Errors/AppError";
 import { getRepository, Repository } from "typeorm";
-
-import { AppError } from "../../../../Errors/AppError";
-import { Specification } from "../../entities/Specification";
+import { Specification } from "../entities/Specification";
 import {
   ICreateSpecificationDTO,
   ISpecificationRepository,
-} from "../ISpecificationRepository";
+} from "../../../repositories/ISpecificationRepository"
 
 class SpecificationsRepository implements ISpecificationRepository {
   private repository: Repository<Specification>;
