@@ -13,16 +13,16 @@ class Category {
   id?: string;
 
   @Column()
-  name: string | undefined;
+  name: string;
 
   @Column()
-  description: string | undefined;
+  description: string;
 
   @CreateDateColumn()
-  created_at: Date | undefined;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updated_at: Date | undefined;
+  updated_at: Date;
 
   constructor() {
     if (!this.id) {
