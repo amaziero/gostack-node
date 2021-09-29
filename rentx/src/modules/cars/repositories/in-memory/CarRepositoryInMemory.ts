@@ -33,9 +33,13 @@ class CarRepositoryInMemory implements ICarRepository {
   async findByName(name: string): Promise<Cars | undefined> {
     const searchCar = this.cars.find((car) => car.name === name);
 
-    if (!searchCar) {
-      throw new Error("Not fund");
-    }
+    return searchCar;
+  }
+
+  async findByLicencePlate(licencePlate: string): Promise<Cars | undefined> {
+    const searchCar = this.cars.find(
+      (car) => car.license_plate === licencePlate
+    );
 
     return searchCar;
   }
