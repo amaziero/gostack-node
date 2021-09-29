@@ -1,0 +1,43 @@
+import { Cars } from "@modules/cars/infra/typeorm/entities/Cars";
+
+import { ICarRepository, ICreateCarDTO } from "../ICarRepository";
+
+class CarRepositoryInMemory implements ICarRepository {
+  cars: Cars[] = [];
+
+  async create({
+    name,
+    brand,
+    category_id,
+    daily_rate,
+    description,
+    fine_amount,
+    license_plate,
+  }: ICreateCarDTO): Promise<void> {
+    const car = new Cars();
+
+    Object.assign(car, {
+      name,
+      brand,
+      category_id,
+      daily_rate,
+      description,
+      fine_amount,
+      license_plate,
+    });
+
+    this.cars.push(car);
+  }
+
+  async findByName(name: string): Promise<Cars | undefined> {
+    const searchCar = this.cars.find((car) => car.name === name);
+
+    if (!searchCar) {
+      throw new Error("Not fund");
+    }
+
+    return searchCar;
+  }
+}
+
+export { CarRepositoryInMemory };

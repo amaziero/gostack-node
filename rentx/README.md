@@ -3,7 +3,6 @@
 **REQUISITOS FUNCIONAIS**
 
 Deve ser possivel cadastrar um novo carro.
-Deve ser possível listar todas as categorias.
 
 **REGRA DE NEGÓCIO**
 
