@@ -27,7 +27,7 @@ describe("Create car", () => {
 
     const searchCar = await carRepository.findByName(car.name);
 
-    expect(searchCar).toHaveProperty("name");
+    expect(searchCar).toHaveProperty("id");
   });
 
   it("Should not be able to create a car with same licence plate", async () => {
@@ -57,5 +57,19 @@ describe("Create car", () => {
       await createCarUseCase.execute(car);
       await createCarUseCase.execute(car);
     }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("All new cars has to have avaliability true", async () => {
+    const car = await createCarUseCase.execute({
+      name: "test",
+      description: "test car",
+      daily_rate: 90,
+      license_plate: "test-9234",
+      fine_amount: 90,
+      brand: "test",
+      category_id: "test-to-test",
+    });
+
+    expect(car.avaliable).toBe(true);
   });
 });
