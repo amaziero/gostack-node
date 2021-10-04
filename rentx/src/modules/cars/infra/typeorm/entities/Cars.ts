@@ -25,7 +25,7 @@ class Cars {
   daily_rate: number;
 
   @Column()
-  avaliable = true;
+  avaliable: boolean;
 
   @Column()
   license_plate: string;
@@ -49,6 +49,7 @@ class Cars {
   constructor() {
     if (!this.id) {
       this.id = uuid();
+      this.avaliable = true;
     }
   }
 }
