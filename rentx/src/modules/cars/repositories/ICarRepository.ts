@@ -8,6 +8,12 @@ interface ICarRepository {
   findByName(name: string): Promise<Cars | undefined>;
 
   findByLicencePlate(licencePlate: string): Promise<Cars | undefined>;
+
+  findAvaliable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Cars[] | undefined>;
 }
 
 export { ICarRepository, ICreateCarDTO };

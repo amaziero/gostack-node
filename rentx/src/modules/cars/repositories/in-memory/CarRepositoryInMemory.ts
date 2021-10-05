@@ -4,7 +4,7 @@ import { Cars } from "@modules/cars/infra/typeorm/entities/Cars";
 import { ICarRepository } from "../ICarRepository";
 
 class CarRepositoryInMemory implements ICarRepository {
-  cars: Cars[] = [];
+  private cars: Cars[] = [];
 
   async create({
     name,
@@ -44,6 +44,27 @@ class CarRepositoryInMemory implements ICarRepository {
     );
 
     return searchCar;
+  }
+
+  async findAvaliable(
+    brand?: string,
+    category_id?: string,
+    name?: string
+  ): Promise<Cars[] | undefined> {
+    const cars = this.cars.filter((car) => {
+      if (
+        car.avaliable === true ||
+        (brand && car.brand === brand) ||
+        (category_id && car.category_id === category_id) ||
+        (name && car.name === name)
+      ) {
+        return car;
+      }
+
+      return undefined;
+    });
+
+    return cars;
   }
 }
 

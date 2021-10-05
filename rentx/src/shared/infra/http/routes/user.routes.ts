@@ -6,6 +6,8 @@ import { CreateUserController } from "@modules/accounts/useCases/createUser/Crea
 import { UpdateUserAvatarController } from "@modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController";
 import { ensuereAuthenticate } from "@shared/infra/http/middleware/ensureAuthenticated";
 
+import { ensuereAdmin } from "../middleware/ensureAdmin";
+
 const usersRoutes = Router();
 const createUserController = new CreateUserController();
 const updatateUserAvatarController = new UpdateUserAvatarController();
@@ -17,6 +19,7 @@ usersRoutes.post("/", createUserController.handle);
 usersRoutes.patch(
   "/avatar",
   ensuereAuthenticate,
+  ensuereAdmin,
   uploadAvatar.single("avatar"),
   updatateUserAvatarController.handle
 );
