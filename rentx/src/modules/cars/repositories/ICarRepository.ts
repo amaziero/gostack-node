@@ -14,6 +14,8 @@ interface ICarRepository {
     category_id?: string,
     name?: string
   ): Promise<Cars[] | undefined>;
+
+  findById(car_id: string | undefined): Promise<Cars | undefined>;
 }
 
 export { ICarRepository, ICreateCarDTO };

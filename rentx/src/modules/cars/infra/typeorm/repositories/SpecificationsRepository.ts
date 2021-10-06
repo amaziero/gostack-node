@@ -1,10 +1,12 @@
-import { AppError } from "@shared/Errors/AppError";
 import { getRepository, Repository } from "typeorm";
-import { Specification } from "../entities/Specification";
+
+import { AppError } from "@shared/Errors/AppError";
+
 import {
   ICreateSpecificationDTO,
   ISpecificationRepository,
-} from "../../../repositories/ISpecificationRepository"
+} from "../../../repositories/ISpecificationRepository";
+import { Specification } from "../entities/Specification";
 
 class SpecificationsRepository implements ISpecificationRepository {
   private repository: Repository<Specification>;
@@ -13,13 +15,18 @@ class SpecificationsRepository implements ISpecificationRepository {
     this.repository = getRepository(Specification);
   }
 
-  async create({ name, description }: ICreateSpecificationDTO): Promise<void> {
+  async create({
+    name,
+    description,
+  }: ICreateSpecificationDTO): Promise<Specification> {
     const specification = this.repository.create({
       name,
       description,
     });
 
     await this.repository.save(specification);
+
+    return specification;
   }
 
   async findByName(name: string): Promise<Specification> {
@@ -30,6 +37,12 @@ class SpecificationsRepository implements ISpecificationRepository {
     }
 
     return specification;
+  }
+
+  async findByIds(ids: string[]): Promise<Specification[] | undefined> {
+    const specifications = await this.repository.findByIds(ids);
+
+    return specifications;
   }
 }
 
