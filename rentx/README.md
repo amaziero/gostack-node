@@ -42,7 +42,6 @@ O usuário responsável pelo cadastro deve ser um administrador.
 **REQUISITOS FUNCIONAIS**
 
 Deve ser possível cadastrar a imagem do carro.
-Deve ser possível listar todos os carros.
 
 **REQUISITOS NÃO FUNCIONAIS**
 
