@@ -1,22 +1,46 @@
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+  UpdateDateColumn,
+} from "typeorm";
 import { v4 as uuid } from "uuid";
 
+import { User } from "@modules/accounts/infra/typeorm/entities/User";
+import { Cars } from "@modules/cars/infra/typeorm/entities/Cars";
+
+Entity("rentals");
 class Rental {
+  @PrimaryColumn("uuid")
   id: string;
 
+  @OneToOne(() => Cars)
+  @JoinColumn({ name: "id" })
   car_id: string;
 
+  @OneToOne(() => User)
+  @JoinColumn({ name: "id" })
   user_id: string;
 
+  @Column()
   start_date: Date;
 
+  @Column()
   end_date: Date;
 
+  @Column()
   expected_return_date: Date;
 
+  @Column()
   total: number;
 
+  @CreateDateColumn()
   created_at: Date;
 
+  @UpdateDateColumn()
   updated_at: Date;
 
   constructor() {
