@@ -1,5 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 
+import { AppError } from "@shared/Errors/AppError";
+
 import { ICreateRentalDTO } from "../../dtos/ICreateRentalDTO";
 import { IRentalRepository } from "../../repositories/IRentalRepository";
 import { Rental } from "../typeorm/entities/Rental";
@@ -31,6 +33,16 @@ class RentalRepository implements IRentalRepository {
     const rental = this.repository.create(createRental);
 
     await this.repository.save(rental);
+
+    return rental;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne({ id });
+
+    if (!rental) {
+      throw new AppError("can't find rental informed");
+    }
 
     return rental;
   }

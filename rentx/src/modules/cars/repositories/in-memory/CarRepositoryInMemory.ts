@@ -1,5 +1,6 @@
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { Cars } from "@modules/cars/infra/typeorm/entities/Cars";
+import { AppError } from "@shared/Errors/AppError";
 
 import { ICarRepository } from "../ICarRepository";
 
@@ -69,10 +70,19 @@ class CarRepositoryInMemory implements ICarRepository {
     return cars;
   }
 
-  async findById(car_id: string): Promise<Cars | undefined> {
+  async findById(car_id: string): Promise<Cars> {
     const searchCar = this.cars.find((car) => car.id === car_id);
 
+    if (!searchCar) {
+      throw new AppError("can't find car");
+    }
+
     return searchCar;
+  }
+
+  async updateAvaliable(id: string, avaliable: boolean): Promise<void> {
+    const carIndex = this.cars.findIndex((car) => car.id === id);
+    this.cars[carIndex].avaliable = avaliable;
   }
 }
 

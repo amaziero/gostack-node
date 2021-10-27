@@ -1,3 +1,5 @@
+import { AppError } from "@shared/Errors/AppError";
+
 import { ICreateRentalDTO } from "../../dtos/ICreateRentalDTO";
 import { Rental } from "../../infra/typeorm/entities/Rental";
 import { IRentalRepository } from "../IRentalRepository";
@@ -32,6 +34,16 @@ class RentalRepositoryInMemory implements IRentalRepository {
     });
 
     this.rentals.push(rental);
+
+    return rental;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = this.rentals.find((rental) => rental.id === id);
+
+    if (!rental) {
+      throw new AppError("can't find rental informed");
+    }
 
     return rental;
   }

@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm";
 
 import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
 import { ICarRepository } from "@modules/cars/repositories/ICarRepository";
+import { AppError } from "@shared/Errors/AppError";
 
 import { Cars } from "../entities/Cars";
 
@@ -76,10 +77,24 @@ class CarRepository implements ICarRepository {
     return cars;
   }
 
-  async findById(car_id: string): Promise<Cars | undefined> {
+  async findById(car_id: string): Promise<Cars> {
     const car = await this.repository.findOne(car_id);
 
+    if (!car) {
+      throw new AppError("can't find car");
+    }
+
     return car;
+  }
+
+  async updateAvaliable(id: string, avaliable: boolean): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({ avaliable })
+      .where("id = :id")
+      .setParameters({ id })
+      .execute();
   }
 }
 
