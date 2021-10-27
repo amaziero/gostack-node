@@ -7,7 +7,7 @@ import { IDateProvider } from "@shared/container/providers/DateProvider/IDatePro
 import { AppError } from "@shared/Errors/AppError";
 
 interface IRequest {
-  rental_id: string;
+  user_id: string;
   id: string;
 }
 
@@ -23,9 +23,9 @@ class DevolutionRentalUseCase {
     @inject("DayjsDateProvider")
     private dateProvider: IDateProvider
   ) {}
-  async execulte({ id, rental_id }: IRequest): Promise<Rental> {
+  async execulte({ id, user_id }: IRequest): Promise<Rental> {
     const rental = await this.rentalRepository.findById(id);
-    const car = await this.carRepository.findById(rental_id);
+    const car = await this.carRepository.findById(rental.car_id);
     const mininumDaily = 1;
 
     if (!rental) {

@@ -68,7 +68,7 @@ Ao realizar um aluguel o status do carro deve mudar para não disponível.
 **DEVOLUÇÃO DO CARRO**
 Deve ser possível realizar a devolução de um caro
 
-**RN**
+**REGRA DE NEGÓCIO**
 
 Se o carro for devolvido com menos de 24 horas, deverá ser cobrado diária completa.
 Ao realizar a devolução, o carro deverá ser liberado para outro aluguel.
@@ -78,3 +78,13 @@ Caso o horário de devolução seja superior ao horário previsto de entrega, de
 multa proporcional aos dias de atraso.
 Caso haja multa, deverá ser somado ao total do aluguel.
 O usuário deve estar logado.
+
+**LISTAGEM DE ALUGUEIS PARA USUÁRIO**
+
+**REQUISITOS FUNCIONAIS**
+
+Deve ser possível realizar a busca de todos os alugueis para o usuário
+
+**REGRA DE NEGÓCIO**
+
+O usuário deve estar logado na aplicação para poder listar os alugueis.
