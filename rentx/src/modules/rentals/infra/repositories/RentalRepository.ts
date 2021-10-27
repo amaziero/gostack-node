@@ -13,21 +13,45 @@ class RentalRepository implements IRentalRepository {
     this.repository = getRepository(Rental);
   }
 
-  async findOpenRentalByCar(car_id: string): Promise<Rental | undefined> {
-    return this.repository.findOne({ car_id });
+  async findOpenRentalByCar(car_id: string): Promise<Rental> {
+    const openByCar = await this.repository.findOne({
+      where: { car_id, end_date: null },
+    });
+
+    if (!openByCar) {
+      throw new AppError("cant find car");
+    }
+
+    return openByCar;
   }
-  async findOpenRentalByUser(user_id: string): Promise<Rental | undefined> {
-    return this.repository.findOne({ user_id });
+
+  async findOpenRentalByUser(user_id: string): Promise<Rental> {
+    const openByUser = await this.repository.findOne({
+      where: { user_id, end_date: null },
+    });
+
+    if (!openByUser) {
+      throw new AppError("cant find car");
+    }
+
+    return openByUser;
   }
+
   async create({
     user_id,
     car_id,
     expected_return_date,
+    id,
+    end_date,
+    total,
   }: ICreateRentalDTO): Promise<Rental> {
     const createRental = {
       user_id,
       car_id,
       expected_return_date,
+      id,
+      end_date,
+      total,
     };
 
     const rental = this.repository.create(createRental);
