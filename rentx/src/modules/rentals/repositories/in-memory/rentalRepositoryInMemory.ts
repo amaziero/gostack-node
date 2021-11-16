@@ -7,16 +7,28 @@ import { IRentalRepository } from "../IRentalRepository";
 class RentalRepositoryInMemory implements IRentalRepository {
   rentals: Rental[] = [];
 
-  async findOpenRentalByCar(car_id: string): Promise<Rental | undefined> {
-    return this.rentals.find(
+  async findOpenRentalByCar(car_id: string): Promise<Rental> {
+    const rental = this.rentals.find(
       (rental) => rental.car_id === car_id && !rental.end_date
     );
+
+    if (!rental) {
+      throw new AppError("cant find rental");
+    }
+
+    return rental;
   }
 
-  async findOpenRentalByUser(user_id: string): Promise<Rental | undefined> {
-    return this.rentals.find(
+  async findOpenRentalByUser(user_id: string): Promise<Rental> {
+    const rental = this.rentals.find(
       (rental) => rental.user_id === user_id && !rental.end_date
     );
+
+    if (!rental) {
+      throw new AppError("cant find rental");
+    }
+
+    return rental;
   }
 
   async create({
@@ -46,6 +58,16 @@ class RentalRepositoryInMemory implements IRentalRepository {
     }
 
     return rental;
+  }
+
+  async findByUserId(id: string): Promise<Rental[]> {
+    const rentals = this.rentals.find((rental) => rental.id === id);
+
+    if (!rentals) {
+      throw new AppError("can't find rental informed");
+    }
+
+    return rentals;
   }
 }
 

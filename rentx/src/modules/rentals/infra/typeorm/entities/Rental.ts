@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
@@ -16,6 +17,10 @@ Entity("rentals");
 class Rental {
   @PrimaryColumn("uuid")
   id: string;
+
+  @ManyToOne(() => Cars)
+  @JoinColumn({ name: "car_id" })
+  car: Cars;
 
   @OneToOne(() => Cars)
   @JoinColumn({ name: "id" })

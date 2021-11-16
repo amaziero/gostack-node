@@ -11,6 +11,7 @@ interface IRentalRepository {
   }: ICreateRentalDTO): Promise<Rental>;
 
   findById(id: string): Promise<Rental>;
+  findByUserId(id: string): Promise<Rental[]>;
 }
 
 export { IRentalRepository };

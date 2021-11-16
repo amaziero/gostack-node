@@ -2,7 +2,7 @@
     "env": {
         "es2020": true,
         "node": true,
-				"jest": true
+        "jest": true
     },
     "extends": [
         "airbnb-base",
@@ -23,21 +23,34 @@
     "rules": {
         "prefer-const": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "no-unused-vars": ["warn", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
+        "no-unused-vars": [
+            "warn",
+            {
+                "varsIgnorePattern": "^_",
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "@typescript-eslint/no-unused-vars": [
             "warn",
             {
-              "argsIgnorePattern": "_"
+                "argsIgnorePattern": "_"
             }
         ],
-        "prettier/prettier": "error",
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "camelcase": "off",
         "import/no-unresolved": 0,
         "@typescript-eslint/naming-convention": [
             "error",
             {
                 "selector": "interface",
-                "format": ["PascalCase"],
+                "format": [
+                    "PascalCase"
+                ],
                 "custom": {
                     "regex": "^I[A-Z]",
                     "match": true
@@ -62,13 +75,28 @@
             "warn",
             {
                 "newlinesBetween": "always",
-                "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
-                "alphabetize": { "order": "asc", "ignoreCase": true }
+                "groups": [
+                    "module",
+                    "/^@/",
+                    [
+                        "parent",
+                        "sibling",
+                        "index"
+                    ]
+                ],
+                "alphabetize": {
+                    "order": "asc",
+                    "ignoreCase": true
+                }
             }
         ],
         "import/no-extraneous-dependencies": [
             0,
-            { "devDependencies": ["**/*.spec.js"] }
+            {
+                "devDependencies": [
+                    "**/*.spec.js"
+                ]
+            }
         ]
     },
     "settings": {
