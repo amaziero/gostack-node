@@ -35,8 +35,7 @@ class CreateRentalUseCase {
       car_id
     );
 
-    console.log(carUnavailable);
-
+    // Gets in only if already has an rental for car in the same time
     if (carUnavailable) {
       throw new AppError("Car is unavailable");
     }
@@ -45,6 +44,7 @@ class CreateRentalUseCase {
       user_id
     );
 
+    // Gets in only if already has an rental for user in the same time
     if (rentalOpenToUser) {
       throw new AppError("There's a rental in progress to this user");
     }

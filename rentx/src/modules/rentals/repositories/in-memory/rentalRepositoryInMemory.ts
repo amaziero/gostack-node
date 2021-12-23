@@ -7,26 +7,18 @@ import { IRentalRepository } from "../IRentalRepository";
 class RentalRepositoryInMemory implements IRentalRepository {
   rentals: Rental[] = [];
 
-  async findOpenRentalByCar(car_id: string): Promise<Rental> {
+  async findOpenRentalByCar(car_id: string): Promise<Rental | undefined> {
     const rental = this.rentals.find(
       (rental) => rental.car_id === car_id && !rental.end_date
     );
 
-    if (!rental) {
-      throw new AppError("cant find rental");
-    }
-
     return rental;
   }
 
-  async findOpenRentalByUser(user_id: string): Promise<Rental> {
+  async findOpenRentalByUser(user_id: string): Promise<Rental | undefined> {
     const rental = this.rentals.find(
       (rental) => rental.user_id === user_id && !rental.end_date
     );
-
-    if (!rental) {
-      throw new AppError("cant find rental");
-    }
 
     return rental;
   }
@@ -50,7 +42,7 @@ class RentalRepositoryInMemory implements IRentalRepository {
     return rental;
   }
 
-  async findById(id: string): Promise<Rental> {
+  async findById(id: string): Promise<Rental | undefined> {
     const rental = this.rentals.find((rental) => rental.id === id);
 
     if (!rental) {
@@ -61,7 +53,7 @@ class RentalRepositoryInMemory implements IRentalRepository {
   }
 
   async findByUserId(id: string): Promise<Rental[]> {
-    const rentals = this.rentals.find((rental) => rental.id === id);
+    const rentals = this.rentals.filter((rental) => rental.id === id);
 
     if (!rentals) {
       throw new AppError("can't find rental informed");

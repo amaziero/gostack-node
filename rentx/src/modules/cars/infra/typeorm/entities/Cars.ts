@@ -15,7 +15,7 @@ import { Specification } from "./Specification";
 
 @Entity("cars")
 class Cars {
-  @PrimaryColumn("uuid")
+  @PrimaryColumn()
   id?: string;
 
   @Column()
@@ -59,6 +59,7 @@ class Cars {
 
   constructor() {
     if (!this.id) {
+      console.log((this.id = uuid()));
       this.id = uuid();
       this.avaliable = true;
     }

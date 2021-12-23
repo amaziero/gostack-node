@@ -28,8 +28,22 @@ describe("Create Rental", () => {
   });
 
   it("should be able to create a new rental", async () => {
+    const car = await carRepositoryInMemory.create({
+      name: "Test",
+      description: "test",
+      brand: "test",
+      category_id: "123456",
+      daily_rate: 100,
+      fine_amount: 100,
+      license_plate: "asd1235",
+    });
+
+    if (!car.id) {
+      throw new AppError("car not found");
+    }
+
     const createRental = {
-      car_id: "123456",
+      car_id: car.id,
       user_id: "123456",
       expected_return_date: dayAdd24Hours,
     };
@@ -41,8 +55,22 @@ describe("Create Rental", () => {
   });
 
   it("should not be able to create a new rental with a rental in progress", async () => {
+    const car = await carRepositoryInMemory.create({
+      name: "Test",
+      description: "test",
+      brand: "test",
+      category_id: "123456",
+      daily_rate: 100,
+      fine_amount: 100,
+      license_plate: "asd1235",
+    });
+
+    if (!car.id) {
+      throw new AppError("car not found");
+    }
+
     const createRental = {
-      car_id: "123456",
+      car_id: car.id,
       user_id: "123456",
       expected_return_date: dayAdd24Hours,
     };
@@ -55,8 +83,22 @@ describe("Create Rental", () => {
   });
 
   it("should not be able to create a new rental car already rented", async () => {
+    const car = await carRepositoryInMemory.create({
+      name: "Test",
+      description: "test",
+      brand: "test",
+      category_id: "123456",
+      daily_rate: 100,
+      fine_amount: 100,
+      license_plate: "asd1235",
+    });
+
+    if (!car.id) {
+      throw new AppError("car not found");
+    }
+
     const createRental = {
-      car_id: "123456",
+      car_id: car.id,
       user_id: "123456",
       expected_return_date: dayAdd24Hours,
     };

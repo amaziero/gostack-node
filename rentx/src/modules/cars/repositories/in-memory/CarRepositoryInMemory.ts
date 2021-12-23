@@ -15,7 +15,6 @@ class CarRepositoryInMemory implements ICarRepository {
     description,
     fine_amount,
     license_plate,
-    id,
   }: ICreateCarDTO): Promise<Cars> {
     const car = new Cars();
 
@@ -27,7 +26,6 @@ class CarRepositoryInMemory implements ICarRepository {
       description,
       fine_amount,
       license_plate,
-      id,
     });
 
     this.cars.push(car);

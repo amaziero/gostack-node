@@ -33,13 +33,14 @@ describe("Create Category", () => {
   });
 
   it("should not be able to create categories with same name", async () => {
-    expect(async () => {
-      const categoryTest = {
-        name: "test",
-        description: "test",
-      };
+    const categoryTest = {
+      name: "test",
+      description: "test",
+    };
 
-      await createCategoryUseCase.execute(categoryTest);
+    await createCategoryUseCase.execute(categoryTest);
+
+    expect(async () => {
       await createCategoryUseCase.execute(categoryTest);
     }).rejects.toBeInstanceOf(AppError);
   });

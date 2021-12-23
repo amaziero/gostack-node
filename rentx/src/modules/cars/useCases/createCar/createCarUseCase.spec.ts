@@ -44,17 +44,6 @@ describe("Create car", () => {
     await createCarUseCase.execute(car);
 
     expect(async () => {
-      const car = {
-        name: "test",
-        description: "test car",
-        daily_rate: 90,
-        license_plate: "test-1234",
-        fine_amount: 90,
-        brand: "test",
-        category_id: "test-to-test",
-      };
-
-      await createCarUseCase.execute(car);
       await createCarUseCase.execute(car);
     }).rejects.toBeInstanceOf(AppError);
   });

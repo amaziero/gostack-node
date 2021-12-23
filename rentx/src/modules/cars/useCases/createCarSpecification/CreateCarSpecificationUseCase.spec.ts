@@ -19,10 +19,10 @@ describe("Create Car Specification", () => {
   });
 
   it("should not be able to add a new specification to the car which not exists", async () => {
-    expect(async () => {
-      const car_id = "1324";
-      const specification_id = ["1234"];
+    const car_id = "1324";
+    const specification_id = ["1234"];
 
+    expect(async () => {
       await createCarSpecificationUseCase.execulte({
         car_id,
         specification_id,
@@ -40,6 +40,10 @@ describe("Create Car Specification", () => {
       brand: "test1",
       category_id: "test1-to-test",
     });
+
+    if (!car.id) {
+      throw new AppError("car not found");
+    }
 
     const specification = await specificationsRepository.create({
       description: "test",

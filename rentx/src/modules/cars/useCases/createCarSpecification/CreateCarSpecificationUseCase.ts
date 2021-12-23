@@ -7,7 +7,7 @@ import { ISpecificationRepository } from "@modules/cars/repositories/ISpecificat
 import { AppError } from "@shared/Errors/AppError";
 
 interface IRequest {
-  car_id: string | undefined;
+  car_id: string;
   specification_id: string[];
 }
 

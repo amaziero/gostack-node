@@ -24,13 +24,14 @@ class DevolutionRentalUseCase {
     private dateProvider: IDateProvider
   ) {}
   async execulte({ id, user_id }: IRequest): Promise<Rental> {
-    const rental = await this.rentalRepository.findById(id);
-    const car = await this.carRepository.findById(rental.car_id);
     const mininumDaily = 1;
+    const rental = await this.rentalRepository.findById(id);
 
     if (!rental) {
       throw new AppError("Can't find the rental informed");
     }
+
+    const car = await this.carRepository.findById(rental.car_id);
 
     const dateNow = this.dateProvider.dateNow();
 
