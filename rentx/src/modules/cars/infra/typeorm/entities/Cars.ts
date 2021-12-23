@@ -59,7 +59,6 @@ class Cars {
 
   constructor() {
     if (!this.id) {
-      console.log((this.id = uuid()));
       this.id = uuid();
       this.avaliable = true;
     }

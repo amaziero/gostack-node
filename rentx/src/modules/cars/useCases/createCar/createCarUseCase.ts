@@ -25,7 +25,7 @@ class CreateCarUseCase {
       data.license_plate
     );
 
-    if (!searchCar === undefined) {
+    if (searchCar) {
       throw new AppError("car alreary exists");
     }
 

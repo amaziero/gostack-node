@@ -55,7 +55,7 @@ describe("Create Rental", () => {
   });
 
   it("should not be able to create a new rental with a rental in progress", async () => {
-    const car = await carRepositoryInMemory.create({
+    const car1 = await carRepositoryInMemory.create({
       name: "Test",
       description: "test",
       brand: "test",
@@ -65,21 +65,41 @@ describe("Create Rental", () => {
       license_plate: "asd1235",
     });
 
-    if (!car.id) {
+    if (!car1.id) {
       throw new AppError("car not found");
     }
 
-    const createRental = {
-      car_id: car.id,
+    const car2 = await carRepositoryInMemory.create({
+      name: "Test",
+      description: "test",
+      brand: "test",
+      category_id: "123456",
+      daily_rate: 100,
+      fine_amount: 100,
+      license_plate: "asd1235",
+    });
+
+    if (!car2.id) {
+      throw new AppError("car not found");
+    }
+
+    const createRental1 = {
+      car_id: car1.id,
       user_id: "123456",
       expected_return_date: dayAdd24Hours,
     };
 
-    await createRentalUseCase.execute(createRental);
+    const createRental2 = {
+      car_id: car2.id,
+      user_id: "123456",
+      expected_return_date: dayAdd24Hours,
+    };
 
-    expect(async () => {
-      await createRentalUseCase.execute(createRental);
-    }).rejects.toBeInstanceOf(AppError);
+    await createRentalUseCase.execute(createRental1);
+
+    await expect(createRentalUseCase.execute(createRental2)).rejects.toEqual(
+      new AppError("There's a rental in progress to this user")
+    );
   });
 
   it("should not be able to create a new rental car already rented", async () => {

@@ -43,9 +43,9 @@ describe("Create car", () => {
 
     await createCarUseCase.execute(car);
 
-    expect(async () => {
-      await createCarUseCase.execute(car);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCarUseCase.execute(car)).rejects.toEqual(
+      new AppError("car alreary exists")
+    );
   });
 
   it("All new cars has to have avaliability true", async () => {

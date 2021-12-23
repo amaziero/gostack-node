@@ -36,12 +36,14 @@ describe("Authenticate User", () => {
   });
 
   it("should not be able to create a user", async () => {
-    expect(async () => {
-      await authenticateUserUserCase.execulte({
+    await expect(
+      authenticateUserUserCase.execulte({
         email: "jhon_doe@test.com",
         password: "test123",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(
+      new AppError("Error trying to check email and pass, try again!")
+    );
   });
 
   it("should not be able to authenticate with wrong password", async () => {
@@ -54,11 +56,13 @@ describe("Authenticate User", () => {
 
     await createUserUseCase.execute(user);
 
-    expect(async () => {
-      await authenticateUserUserCase.execulte({
+    await expect(
+      authenticateUserUserCase.execulte({
         email: user.email,
         password: "wrong_password",
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(
+      new AppError("Error trying to check email and pass, try again!")
+    );
   });
 });

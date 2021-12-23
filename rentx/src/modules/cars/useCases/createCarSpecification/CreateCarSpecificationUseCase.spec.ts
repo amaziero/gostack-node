@@ -22,12 +22,12 @@ describe("Create Car Specification", () => {
     const car_id = "1324";
     const specification_id = ["1234"];
 
-    expect(async () => {
-      await createCarSpecificationUseCase.execulte({
+    await expect(
+      createCarSpecificationUseCase.execulte({
         car_id,
         specification_id,
-      });
-    }).rejects.toBeInstanceOf(AppError);
+      })
+    ).rejects.toEqual(new AppError("can't find car"));
   });
 
   it("should be able to add a new specification to the car", async () => {

@@ -40,8 +40,8 @@ describe("Create Category", () => {
 
     await createCategoryUseCase.execute(categoryTest);
 
-    expect(async () => {
-      await createCategoryUseCase.execute(categoryTest);
-    }).rejects.toBeInstanceOf(AppError);
+    await expect(createCategoryUseCase.execute(categoryTest)).rejects.toEqual(
+      new AppError("Category already created")
+    );
   });
 });
