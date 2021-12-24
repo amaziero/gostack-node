@@ -35,7 +35,7 @@ class RefreshTokenUseCase {
       throw new AppError("Refresh token does not exists");
     }
 
-    await this.userTokenRepository.deleteById(user_id);
+    await this.userTokenRepository.deleteById(userToken.id);
 
     const refresh_token_create = sign({ email }, auth.secret_refresh_token, {
       subject: sub,

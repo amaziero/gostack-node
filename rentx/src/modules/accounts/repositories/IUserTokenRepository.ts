@@ -9,7 +9,7 @@ interface IUserTokenRepository {
     token: string
   ): Promise<UserTokens | undefined>;
 
-  deleteById(user_id: string): Promise<void>;
+  deleteById(token_id: string): Promise<void>;
 }
 
 export { IUserTokenRepository };

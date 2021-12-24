@@ -17,6 +17,7 @@ interface IReponse {
   user: {
     name: string | undefined;
     email: string | undefined;
+    isAdmin: boolean | undefined;
   };
   token: string;
   refresh_token: string;
@@ -68,6 +69,7 @@ class AuthenticateUserUseCase {
       user: {
         name: userFind.name,
         email: userFind.email,
+        isAdmin: userFind.isAdmin,
       },
       token,
       refresh_token,

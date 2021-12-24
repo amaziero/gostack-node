@@ -13,7 +13,7 @@ export async function ensuereAdmin(
   const usersRepository = new UserRepository();
   const user = await usersRepository.findById(id);
 
-  if (!user.admin) {
+  if (!user.isAdmin) {
     throw new AppError("User does not have permision to proceed");
   }
 
