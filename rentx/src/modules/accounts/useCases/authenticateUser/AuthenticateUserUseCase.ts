@@ -64,7 +64,7 @@ class AuthenticateUserUseCase {
       expires_date: this.dateProvider.addDays(auth.expires_refresh_token_days),
     });
 
-    const tokenReturn: IReponse = {
+    return {
       user: {
         name: userFind.name,
         email: userFind.email,
@@ -72,8 +72,6 @@ class AuthenticateUserUseCase {
       token,
       refresh_token,
     };
-
-    return tokenReturn;
   }
 }
 

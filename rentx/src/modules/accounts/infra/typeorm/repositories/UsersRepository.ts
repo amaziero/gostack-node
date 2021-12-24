@@ -1,7 +1,5 @@
 import { getRepository, Repository } from "typeorm";
 
-import { AppError } from "@shared/Errors/AppError";
-
 import { ICreateUserDTO } from "../../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../../repositories/IUserRepositories";
 import { User } from "../entities/User";
@@ -18,39 +16,27 @@ class UserRepository implements IUsersRepository {
     email,
     password,
     driver_license,
-    avatar,
-    id,
   }: ICreateUserDTO): Promise<void> {
     const user = this.repository.create({
       name,
       email,
       password,
       driver_license,
-      avatar,
-      id,
     });
 
     await this.repository.save(user);
   }
 
-  async findByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.repository.findOne({
       email,
     });
 
-    if (user === undefined) {
-      throw new AppError("Not user fund");
-    }
-
     return user;
   }
 
-  async findById(id: string): Promise<User> {
+  async findById(id: string): Promise<User | undefined> {
     const user = await this.repository.findOne(id);
-
-    if (user === undefined) {
-      throw new AppError("Not user fund");
-    }
 
     return user;
   }
