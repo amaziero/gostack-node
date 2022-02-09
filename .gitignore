@@ -4,3 +4,4 @@ yarn.lock
 assests
 tmp
 coverage
+.env
