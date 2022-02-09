@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import auth from "@config/auth";
-import { UserRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
-import { UsersTokenRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokenRepository";
 import { AppError } from "@shared/Errors/AppError";
 
 interface IPayload {
@@ -16,7 +14,6 @@ export async function ensuereAuthenticate(
   next: NextFunction
 ): Promise<void> {
   const authHeaders = request.headers.authorization;
-  const userTokenRepository = new UsersTokenRepository();
 
   if (!authHeaders) {
     throw new AppError("Token missing!", 401);
@@ -25,20 +22,7 @@ export async function ensuereAuthenticate(
   const [, token] = authHeaders.split(" ");
 
   try {
-    const { sub: user_id } = verify(
-      token,
-      auth.secret_refresh_token
-    ) as IPayload;
-
-    // const usersRepository = new UserRepository();
-    const user = await userTokenRepository.findByUserIdAndRefreshToken(
-      user_id,
-      token
-    );
-
-    if (!user) {
-      throw new AppError("User not fund", 401);
-    }
+    const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
     request.user = {
       id: user_id,
